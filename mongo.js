@@ -1,10 +1,19 @@
-const { MongoClient } = require("mongodb"); 
-// Replace the following with your Atlas connection string                                                                                                                                        
+const { MongoClient } = require("mongodb");                                                                                                                                       
 const uri = "mongodb+srv://m2220user:m2220password@cluster0.dsjyu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
  
  // The database to use
  const dbName = "test";
+
+ let personDocument = 
+ {
+   id: 136984310,
+   is_bot: false,
+   first_name: 'Roman',
+   last_name: 'Velboi',
+   username: 'Napolik',
+   language_code: 'uk'
+ }
                       
  async function run() {
     try {
@@ -14,16 +23,6 @@ const client = new MongoClient(uri);
 
          // Use the collection "people"
          const col = db.collection("people");
-
-         // Construct a document                                                                                                                                                              
-         let personDocument = {
-             "name": { "first": "Anal", "last": "Turing" },
-             "birth": new Date(1912, 5, 23), // June 23, 1912                                                                                                                                 
-             "death": new Date(1954, 5, 7),  // June 7, 1954                                                                                                                                  
-             "contribs": [ "Turing machine", "Turing test", "Turingery" ],
-             "views": 1250000
-         }
-
          // Insert a single document, wait for promise so we can read it back
          const p = await col.insertOne(personDocument);
          // Find one document
